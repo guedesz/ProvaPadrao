@@ -2,7 +2,7 @@ import events.OrderCancellationEvent;
 import events.OrderConfirmationEvent;
 import interfaces.OrderObserver;
 
-public class ObserverAdapter implements java.util.Observer{
+public class ObserverAdapter implements java.util.Observer {
     private OrderObserver orderObserver;
 
     public ObserverAdapter(OrderObserver orderObserver) {

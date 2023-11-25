@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ShoppingCart {
     private static ShoppingCart instance;
-    private List<Item> items = new ArrayList<>();
+    private List<CartItem> items = new ArrayList<>();
 
     private ShoppingCart() {
         // Construtor privado para evitar instanciação direta
@@ -19,33 +19,31 @@ public class ShoppingCart {
         return instance;
     }
 
-    public void addItem(Item item) {
+    public void addItem(Item item, int quantity) {
         // Verifica se o item já está no carrinho
-        boolean itemExists = false;
-        for (Item existingItem : items) {
-            if (existingItem.getName().equals(item.getName())) {
-                existingItem.setQuantity(existingItem.getQuantity() + item.getQuantity());
-                itemExists = true;
-                break;
+        for (CartItem cartItem : items) {
+            if (cartItem.item.equals(item)) {
+                // Atualiza a quantidade se o item já estiver no carrinho
+                cartItem.setQuantity(cartItem.quantity + quantity);
+                return;
             }
         }
 
-        // Se o item não existir, adiciona ao carrinho
-        if (!itemExists) {
-            items.add(item);
-        }
+        // Adiciona um novo CartItem se o item não estiver no carrinho
+        items.add(new CartItem(item, quantity));
     }
 
     public double calculateTotal() {
-        return items.stream().mapToDouble(item -> item.getPrice() * item.getQuantity()).sum();
+        double total = 0;
+        for (CartItem cartItem : items) {
+            total += cartItem.getAllPrice();
+        }
+        return total;
     }
 
     public void displayItems() {
-        System.out.println("Items:");
-        for (Item item : items) {
-            System.out.println(item.getName() + " - Quantity: " + item.getQuantity() + " - $" + item.getPrice());
+        for (CartItem cartItem : items) {
+            System.out.println(cartItem.item.getName() + " - Quantity: " + cartItem.quantity);
         }
-
-        System.out.println("Total: $" + calculateTotal());
     }
 }
