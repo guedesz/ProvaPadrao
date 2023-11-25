@@ -9,10 +9,10 @@ import java.util.Observer;
 public class Main {
     public static void main(String[] args) {
 
-        Item product1 = new Product("Laptop", 100, 3);
-        Item product2 = new Product("Laptop", 100, 1);
-        Item product3 = new Product("Laptop", 100, 2);
-        Item service1 = new Service("Instalation", 50, 1);
+        Item product1 = new Product("Laptop", 100);
+        Item product2 = new Product("Laptop", 100);
+        Item product3 = new Product("Laptop", 100);
+        Item service1 = new Service("Instalation", 50);
 
         // Criando instância do carrinho de compras
         ShoppingCart shoppingCart = ShoppingCart.getInstance();
@@ -29,19 +29,18 @@ public class Main {
 
         eCommerce.registerObserver(logisticAgentObserver);
 
-        eCommerce.addToCart(product1);
-        eCommerce.addToCart(product2);
-        eCommerce.addToCart(product3);
-        eCommerce.addToCart(service1);
+        eCommerce.addToCart(product1, 3);
+        eCommerce.addToCart(product2, 1);
+        eCommerce.addToCart(service1, 2);
 
         String orderId = "123";
         String deliveryAddress = "Rua Principal, 123";
         eCommerce.processOrder(orderId, deliveryAddress);
 
         // Simulando o cancelamento da compra
-        String orderIdToCancel = "124";
-        eCommerce.cancelOrder(orderIdToCancel);
-
+//        String orderIdToCancel = "124";
+//        eCommerce.cancelOrder(orderIdToCancel);
+//
 
     }
 }

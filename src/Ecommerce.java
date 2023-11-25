@@ -36,8 +36,8 @@ public class Ecommerce extends Observable {
         notifyObservers(new OrderCancellationEvent(orderId));
     }
 
-    public void addToCart(Item item) {
-        shoppingCart.addItem(item);
+    public void addToCart(Item item, int quantity) {
+        shoppingCart.addItem(item, quantity);
     }
 
     public void checkout() {
